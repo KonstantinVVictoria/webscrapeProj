@@ -10,7 +10,6 @@ function updateState(component, changed) {
 }
 
 function mergeState(component, globalState) {
-  console.log(component.state, globalState);
   let mergedStateEntries = [];
   Object.entries(globalState).forEach((value) => {
     if (Object.entries(component.state)[0][0] === value[0]) {

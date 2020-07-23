@@ -15,11 +15,11 @@ export default class State {
     );
   };
 
-  static change = (property: string, callback: any) => {
+  static change = (callback: any) => {
     callback();
     document.dispatchEvent(
       new CustomEvent("stateChanged", {
-        detail: { property: property, state: State.toObject() },
+        detail: { state: State.toObject() },
       })
     );
   };

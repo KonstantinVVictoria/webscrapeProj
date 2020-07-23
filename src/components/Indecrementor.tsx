@@ -11,12 +11,12 @@ class Indecrementor extends React.Component {
   }
 
   increment = () => {
-    State.change("number", () => {
+    State.change(() => {
       State.number++;
     });
   };
   decrement = () => {
-    State.change("number", () => {
+    State.change(() => {
       State.number--;
     });
   };
