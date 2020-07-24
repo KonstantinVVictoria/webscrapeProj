@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App.tsx";
 import * as serviceWorker from "./serviceWorker";
-import State from "./State.ts";
+import State from "./State";
 
 ReactDOM.render(
   <React.Fragment>

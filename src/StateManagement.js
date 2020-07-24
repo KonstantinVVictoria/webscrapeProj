@@ -1,5 +1,4 @@
 //Only updates the states that are dependant on the property that was changed
-
 function updateState(component, changed) {
   let mergeStateEntries = [];
   Object.entries(changed.state).forEach((value) => {

@@ -1,51 +1,56 @@
 import * as React from "react";
 import State from "../State";
-import { updateState, mergeState } from "../StateManagement";
-interface Props {
+interface IProps {
   id: string;
 }
-class Indecrementor extends React.Component<Props> {
-  state = { number: 0 };
-  constructor(props: Props) {
-    super(props);
 
-    State.number[props.id] = this.state.number;
-    mergeState(this, State.toObject());
-    document.addEventListener("stateChanged", (event: any) => {
-      updateState(this, event.detail);
-    });
+interface IState {
+  G_number?: number;
+}
+
+class Indecrementor extends React.Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+    this.state = { G_number: 0 };
+    State.now.G_number[props.id] = this.state.G_number;
+    State.updates(this);
   }
 
   increment = () => {
+    let increment = () => {
+      State.now.G_number[this.props.id]++;
+    };
     State.change(() => {
-      State.number[this.props.id]++;
-    });
-  };
-  decrement = () => {
-    State.change(() => {
-      State.number[this.props.id]--;
+      increment();
     });
   };
 
+  decrement = () => {
+    let decrement = () => {
+      State.now.G_number[this.props.id]--;
+    };
+    State.change(() => {
+      decrement();
+    });
+  };
   render() {
-    console.log(State.number[this.props.id]);
     return (
       <React.Fragment>
-        <p>{State.number[this.props.id]}</p>
+        <p>{State.now.G_number[this.props.id]}</p>
         <div
           className="indecrementor-container"
-          style={{ height: State.vh * 4, width: State.vh * 8 }}
+          style={{ height: State.now.G_vh * 4, width: State.now.G_vh * 8 }}
         >
           <div
             className="incrementor"
-            style={{ height: State.vh * 4, width: State.vh * 4 }}
+            style={{ height: State.now.G_vh * 4, width: State.now.G_vh * 4 }}
             onMouseDown={this.increment}
           >
             +
           </div>
           <div
             className="decrementor"
-            style={{ height: State.vh * 4, width: State.vh * 4 }}
+            style={{ height: State.now.G_vh * 4, width: State.now.G_vh * 4 }}
             onMouseDown={this.decrement}
           >
             -
