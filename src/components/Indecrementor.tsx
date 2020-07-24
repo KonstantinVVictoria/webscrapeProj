@@ -39,7 +39,11 @@ class Indecrementor extends React.Component<IProps, IState> {
         <p>{State.now.G_number[this.props.id]}</p>
         <div
           className="indecrementor-container"
-          style={{ height: State.now.G_vh * 4, width: State.now.G_vh * 8 }}
+          style={{
+            height: State.now.G_vh * 4,
+            width: State.now.G_vh * 8,
+            backgroundColor: State.now.G_main_color,
+          }}
         >
           <div
             className="incrementor"

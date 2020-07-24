@@ -27,10 +27,12 @@ class App extends React.Component<IProps, IState> {
   render() {
     return (
       <div className="App">
-        <p>total: {this.sum()}</p>
-        <Indecrementor key={"1"} id={"1"}></Indecrementor>
-        <Indecrementor key={"2"} id={"2"}></Indecrementor>{" "}
-        <div onMouseDown={this.resetCounters}>reset</div>
+        <div>
+          <p>total: {this.sum()}</p>
+          <Indecrementor key={"1"} id={"1"}></Indecrementor>
+          <Indecrementor key={"2"} id={"2"}></Indecrementor>{" "}
+          <div onMouseDown={this.resetCounters}>reset</div>
+        </div>
       </div>
     );
   }
