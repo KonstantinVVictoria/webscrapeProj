@@ -17,8 +17,8 @@ const loadedToxicity = toxicity.load(threshold);
 let initialVh = window.innerHeight;
 let initialVw = window.innerWidth;
 
-//First, create an object that contains all the global properties the can be accessed by any component and is used by multiple components.
-//Structure your data and add default values. Default values can be overwritten after the State description.
+//First, create an object that contains all the global properties that can be accessed by any component and is used by multiple components.
+//Structure your data and add default values. Default values/literals can be overwritten after the State description.
 
 //State description//
 let State = {
@@ -33,7 +33,7 @@ let State = {
     subtitles: {
       toxicityReport: {},
       analyze: () => {}, //It is recommended that you write any properties that you describe after the State description in the State as well.
-      parseJSON: () => {}, //It makes it easier to visualize the structure of your global state.
+      parseJSON: () => {}, //It makes it easier to visualize the structure of data in your global state.
       link: "",
       isLoading: "",
       value: null, //Example of a value property
@@ -47,7 +47,7 @@ let State = {
 /*
 
   What are the proper ways of modifying a global property and change the global state?
-  There are two ways: explicitly and implicitly.
+  There are two proper ways: explicitly and implicitly.
 
   Here is our global state in G_State.jsx:
 
@@ -59,7 +59,7 @@ let State = {
   export default state
   //G_State.jsx//
 
-  >>Here's how you would modify a global property explicitly in the components<<
+  >>Here's how you would modify a global property explicitly<<
 
   //Components.jsx//
   import G_State from "g_state-management";
@@ -77,12 +77,14 @@ let State = {
   G_State.changesTo(newState) -- Finally, update the property and the components that are affected.
   //Components.jsx//
 
-  >>Here's how you would modify a global property implicitly>>
+  >>Here's how you would modify a global property implicitly<<
   --Note: you can modify a global property implicitly only if it has a value property.
 
   //Components.jsx//
   import G_State from "g_state-management";  
-  
+  .
+  .
+  .
   G_state.property.changesTo("incremted_by_one", property + 1);
   //Components.jsx//
 
@@ -192,12 +194,10 @@ State.youtube_video.subtitles.analyze = async () => {
       model
         .classify(State.youtube_video.subtitles.value)
         .then((predictions) => {
-          console.log("resolved");
           resolve(predictions);
         });
     });
   });
-  console.log("not resolved");
   newState.youtube_video = () => {
     State.youtube_video.subtitles.toxicityReport = toxicityReport;
     State.youtube_video.isDisplayed = true;
@@ -209,6 +209,8 @@ State.youtube_video.subtitles.analyze = async () => {
     State.vh = null
     return "cleared_vh"
   }
+
+    Note after this declaration, the newState object will have two property methods: youtube_video and vh.
   */
   G_State.changesTo(newState); //Update the state and broadcast the changes
   //If you need to update to the state again, simply make a new newState object and update the state

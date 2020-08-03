@@ -6,7 +6,7 @@ class Display extends Component {
   constructor(props) {
     super(props);
     this.state = {}; //For class components, you must first define a state.
-    this.state.G_dependancies = G_State.link("youtube_video"); //Then define properties that affect it
+    this.state.G_dependancies = G_State.link("youtube_video"); //Then define properties that affect it.
     G_State.updates(this); //and connect the component to the global state.
   }
 

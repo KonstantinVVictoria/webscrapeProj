@@ -1,8 +1,8 @@
 import React from "react";
-import G_State from "g_state-management"; //Import G_State to gain access to the global state.
+import G_State from "g_state-management"; //Importthe module to gain access to the global state.
 import Overlay from "./components/Overlay";
 import Display from "./components/Display";
-G_State.debug({ live: true }); //You can enable the debug mode to monitor global state changes.
+G_State.debug({ live: true }); //You can enable the debug mode to monitor any global state changes.
 const { vh, vw, isMobile, youtube_video } = G_State.now; //Extrapolate the global properties via desctructuring.
 /*Alternatively, you can use the global properties by stating its path from G_State.now. 
   For example:  G_State.now.youtube_video
@@ -61,5 +61,5 @@ const App = () => {
 };
 
 export default G_State.updates(App, dependancies);
-//If your functional component needs to be updated by a global property, export it.
-//inside and updates wrapper method with the arguments updates(component, dependancies, actions).
+//If your functional component needs to be updated by a global property, export it
+//inside the wrapper method updates with the arguments updates(component, dependancies, actions).

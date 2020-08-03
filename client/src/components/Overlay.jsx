@@ -3,7 +3,6 @@ import G_State from "g_state-management";
 let dependancies = G_State.link("youtube_video");
 const { youtube_video, vh } = G_State.now;
 const Loader = () => {
-  console.log(youtube_video.subtitles.isLoading);
   return (
     <div className="loader" style={{ fontSize: vh(6) }}>
       {youtube_video.subtitles.isLoading}
