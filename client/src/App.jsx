@@ -15,7 +15,7 @@ let dependancies = G_State.link(
 ); /*Think of the global properties that should affect the component when they are changed.
      They are also the global properties that will cause the component to render again*/
 const App = () => {
-  const sendQuery = (event) => {
+  const getSubtitles = (event) => {
     if (
       event.key === "Enter" &&
       event.target.value &&
@@ -48,7 +48,7 @@ const App = () => {
       }
       <input
         className="input"
-        onKeyDown={sendQuery}
+        onKeyDown={getSubtitles}
         style={{
           height: isMobile ? vh(100 * 0.05) : "",
           width: isMobile ? vw(100 * 0.8) : "",
