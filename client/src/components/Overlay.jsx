@@ -5,7 +5,7 @@ const { youtube_video, vh } = G_State.now;
 const Loader = () => {
   return (
     <div className="loader" style={{ fontSize: vh(6) }}>
-      {youtube_video.subtitles.isLoading}
+      {youtube_video.subtitles.loaderDescription}
     </div>
   );
 };

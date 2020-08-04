@@ -2,7 +2,7 @@ import React from "react";
 import G_State from "g_state-management"; //Importthe module to gain access to the global state.
 import Overlay from "./components/Overlay";
 import Display from "./components/Display";
-G_State.debug({ live: true }); //You can enable the debug mode to monitor any global state changes.
+G_State.debug({ live: true, showMount: true }); //You can enable the debug mode to monitor any global state changes.
 const { vh, vw, isMobile, youtube_video } = G_State.now; //Extrapolate the global properties via desctructuring.
 /*Alternatively, you can use the global properties by stating its path from G_State.now. 
   For example:  G_State.now.youtube_video
@@ -19,8 +19,8 @@ const App = () => {
     if (
       event.key === "Enter" &&
       event.target.value &&
-      youtube_video.subtitles.isLoading !== "Loading" &&
-      youtube_video.subtitles.isLoading !== "Parsing Subtitles"
+      youtube_video.subtitles.loaderDescription !== "Loading" &&
+      youtube_video.subtitles.loaderDescription !== "Parsing Subtitles"
     ) {
       //Directly access any global property from any component.
       if (youtube_video.link.verify(event.target.value))

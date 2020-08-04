@@ -35,7 +35,7 @@ let State = {
       analyze: () => {}, //It is recommended that you write any properties that you describe after the State description in the State as well.
       parseJSON: () => {}, //It makes it easier to visualize the structure of data in your global state.
       link: "",
-      isLoading: "",
+      loaderDescription: "",
       value: null, //Example of a value property
       from_request: () => {
         return false;
@@ -107,10 +107,10 @@ State.youtube_video.link.verify = (link) => {
   let isLink = link.indexOf("https://www.youtube.com/watch?v=") > -1;
   newState.youtube_video = () => {
     State.youtube_video.link.value = isLink ? link : null;
-    State.youtube_video.subtitles.isLoading = isLink
+    State.youtube_video.subtitles.loaderDescription = isLink
       ? "Verifying Link"
       : "Not a valid link";
-    return "verified_link";
+    return "verified_link_is " + isLink;
   };
   G_State.changesTo(newState);
   return isLink;
@@ -121,7 +121,7 @@ State.youtube_video.subtitles.from_request = async (request) => {
 
   newState.youtube_video = () => {
     State.youtube_video.isDisplayed = false;
-    State.youtube_video.subtitles.isLoading = "Loading";
+    State.youtube_video.subtitles.loaderDescription = "Loading";
     return "fetching_subtitles";
   };
 
@@ -149,7 +149,7 @@ State.youtube_video.subtitles.from_request = async (request) => {
     State.youtube_video.subtitles.parseJSON(State.youtube_video.subtitles.link);
   } else {
     newState.youtube_video = () => {
-      State.youtube_video.subtitles.isLoading =
+      State.youtube_video.subtitles.loaderDescription =
         "Error could not fetch subtitles";
       State.youtube_video.subtitles.link = "";
       return "did_not_recieve_subtitles";
@@ -179,7 +179,8 @@ State.youtube_video.subtitles.parseJSON = async ({ link }) => {
   if (subtitles) {
     newState.youtube_video = () => {
       G_State.now.youtube_video.subtitles.value = subtitles;
-      G_State.now.youtube_video.subtitles.isLoading = "Parsing Subtitles";
+      G_State.now.youtube_video.subtitles.loaderDescription =
+        "Parsing Subtitles";
       return "aquired_subtitles_now_parsing";
     };
     G_State.changesTo(newState);
@@ -201,7 +202,7 @@ State.youtube_video.subtitles.analyze = async () => {
   newState.youtube_video = () => {
     State.youtube_video.subtitles.toxicityReport = toxicityReport;
     State.youtube_video.isDisplayed = true;
-    State.youtube_video.subtitles.isLoading = "";
+    State.youtube_video.subtitles.loaderDescription = "";
     return "analyzed_and_composed_toxicity_report";
   };
   //You can combine additional changes to the other global state properties like so:
